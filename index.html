@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ConectaSocial</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f8fb;color:#123b68}
+header{background:linear-gradient(135deg,#0867bd,#2d9b62);color:#fff;padding:30px 18px;text-align:center}
+header h1{margin:0;font-size:32px}header p{margin:8px 0}
+nav{position:sticky;top:0;z-index:5;background:#fff;padding:10px;display:flex;gap:8px;overflow:auto;box-shadow:0 2px 10px #0002}
+nav button{border:0;background:#e9f5ff;color:#0867bd;padding:10px 14px;border-radius:20px;white-space:nowrap;font-weight:bold;cursor:pointer}
+nav button:hover{background:#0867bd;color:#fff}
+main{max-width:900px;margin:24px auto;padding:0 15px}
+.card{background:#fff;border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 4px 15px #0001}
+.num{display:inline-flex;width:40px;height:40px;border-radius:50%;background:#0867bd;color:#fff;align-items:center;justify-content:center;font-weight:bold}
+h2{display:inline;margin-left:10px;font-size:22px}.question{font-weight:bold;font-size:17px}
+li{margin:9px 0;line-height:1.5}.badge{background:#eaf6ff;padding:14px;border-radius:12px;margin-top:15px}
+.action{display:inline-block;margin-top:12px;background:#0867bd;color:white;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:bold;cursor:pointer;border:0}
+.hidden{display:none}footer{text-align:center;padding:25px;color:#567}
+</style>
+</head>
+<body>
+<header id="inicio"><h1>🤝 ConectaSocial</h1><p>Organize, conecte e fortaleça sua ação social!</p></header>
+
+<nav>
+<button onclick="go('inicio')">Início</button>
+<button onclick="go('p1')">1 Problema</button><button onclick="go('p2')">2 Carência</button>
+<button onclick="go('p3')">3 Solução</button><button onclick="go('p4')">4 Público</button>
+<button onclick="go('p5')">5 Negócio</button><button onclick="go('p6')">6 Diferencial</button>
+<button onclick="go('p7')">7 Equipe</button><button onclick="go('p8')">8 Próximos passos</button>
+</nav>
+
+<main>
+<div class="card" id="p1"><span class="num">1</span><h2>Problema</h2><p class="question">Que problema real existe, e para quem ele importa?</p>
+<p>ONGs e projetos sociais precisam administrar voluntários, participantes, doações, eventos, parceiros e relatórios usando várias ferramentas diferentes.</p></div>
+
+<div class="card" id="p2"><span class="num">2</span><h2>Carência do Problema</h2><p class="question">Tragam pesquisas e dados que comprovem essa necessidade.</p>
+<p>Muitas organizações sociais, especialmente as pequenas, possuem poucos recursos para sistemas de gestão e precisam de uma solução simples, acessível e centralizada.</p></div>
+
+<div class="card" id="p3"><span class="num">3</span><h2>Solução</h2><p class="question">Como a ideia resolve esse problema de forma inovadora?</p>
+<ul><li>Gestão de projetos e participantes</li><li>Cadastro e controle de voluntários</li><li>Campanhas e registro de doações</li><li>Agenda de eventos</li><li>Relatórios e prestação de contas</li><li>Comunicação com parceiros e apoiadores</li></ul></div>
+
+<div class="card" id="p4"><span class="num">4</span><h2>Público-alvo e Mercado</h2><p class="question">Quem são os clientes e qual o tamanho do mercado?</p>
+<ul><li>ONGs e projetos sociais</li><li>Instituições religiosas e comunitárias</li><li>Escolas e associações</li><li>Empresas apoiadoras</li><li>Voluntários e doadores</li></ul></div>
+
+<div class="card" id="p5"><span class="num">5</span><h2>Modelo de Negócio</h2><p class="question">Como a startup vai gerar receita, e quem paga?</p>
+<ul><li>Plano gratuito com funções básicas</li><li>Planos pagos para organizações</li><li>Comissões sobre campanhas e parcerias</li><li>Publicidade e patrocínios</li></ul></div>
+
+<div class="card" id="p6"><span class="num">6</span><h2>Diferencial Competitivo</h2><p class="question">O que torna a solução única frente à concorrência?</p>
+<ul><li>Foco específico no terceiro setor</li><li>Interface simples e acessível</li><li>Projetos, voluntários, doações e comunicação em um só lugar</li><li>Relatórios para transparência</li><li>Conexão entre projetos, voluntários, doadores e empresas</li></ul></div>
+
+<div class="card" id="p7"><span class="num">7</span><h2>Equipe e Gestão</h2><p class="question">Quem lidera o projeto e quais habilidades a equipe precisa ter?</p>
+<ul><li>Gestor(a) do projeto</li><li>Desenvolvedor(a) de tecnologia</li><li>Profissional de marketing e comunicação</li><li>Responsável por parcerias e captação</li><li>Suporte e atendimento</li></ul></div>
+
+<div class="card" id="p8"><span class="num">8</span><h2>Próximos Passos</h2><p class="question">Quais as próximas etapas para testar e validar a ideia?</p>
+<ol><li>Desenvolver o MVP.</li><li>Testar com ONGs e projetos sociais.</li><li>Coletar feedback e ajustar o aplicativo.</li><li>Lançar oficialmente e captar parceiros.</li><li>Expandir para outras cidades e estados.</li></ol>
+<button class="action" onclick="go('inicio')">⬆ Voltar ao início</button></div>
+</main>
+<footer>ConectaSocial — Juntos por um impacto maior.</footer>
+<script>
+function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+</script>
+</body>
+</html>
