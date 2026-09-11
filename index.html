@@ -5,61 +5,150 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ConectaSocial</title>
 <style>
-*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f4f8fb;color:#123b68}
-header{background:linear-gradient(135deg,#0867bd,#2d9b62);color:#fff;padding:30px 18px;text-align:center}
-header h1{margin:0;font-size:32px}header p{margin:8px 0}
-nav{position:sticky;top:0;z-index:5;background:#fff;padding:10px;display:flex;gap:8px;overflow:auto;box-shadow:0 2px 10px #0002}
-nav button{border:0;background:#e9f5ff;color:#0867bd;padding:10px 14px;border-radius:20px;white-space:nowrap;font-weight:bold;cursor:pointer}
-nav button:hover{background:#0867bd;color:#fff}
-main{max-width:900px;margin:24px auto;padding:0 15px}
-.card{background:#fff;border-radius:18px;padding:24px;margin:18px 0;box-shadow:0 4px 15px #0001}
-.num{display:inline-flex;width:40px;height:40px;border-radius:50%;background:#0867bd;color:#fff;align-items:center;justify-content:center;font-weight:bold}
-h2{display:inline;margin-left:10px;font-size:22px}.question{font-weight:bold;font-size:17px}
-li{margin:9px 0;line-height:1.5}.badge{background:#eaf6ff;padding:14px;border-radius:12px;margin-top:15px}
-.action{display:inline-block;margin-top:12px;background:#0867bd;color:white;padding:12px 18px;border-radius:10px;text-decoration:none;font-weight:bold;cursor:pointer;border:0}
-.hidden{display:none}footer{text-align:center;padding:25px;color:#567}
+:root{--primary:#7b2cbf;--secondary:#f3e8ff;--dark:#24142f;--bg:#faf7fc;--white:#fff;--green:#168a55;--red:#b42318}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#29232d}
+header{background:linear-gradient(135deg,#7b2cbf,#9d4edd);color:white;padding:22px 18px;text-align:center;position:sticky;top:0;z-index:10}
+header h1{margin:0 0 5px;font-size:28px} header p{margin:0;opacity:.9}
+nav{display:flex;gap:8px;overflow-x:auto;padding:10px;background:white;border-bottom:1px solid #ddd;position:sticky;top:91px;z-index:9}
+nav button{border:0;background:#f1edf4;padding:11px 14px;border-radius:22px;white-space:nowrap;cursor:pointer;font-weight:bold;color:#49334f}
+nav button.active{background:var(--primary);color:white}
+main{max-width:1100px;margin:auto;padding:22px 16px 50px}.tab{display:none}.tab.active{display:block}
+h2{color:var(--primary);margin-top:5px}.subtitle{color:#665b69}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.card{background:white;border-radius:16px;padding:18px;box-shadow:0 3px 14px #0000000d;border:1px solid #eee}
+.card h3{margin-top:0}.number{font-size:30px;font-weight:bold;color:var(--primary)}
+form{background:white;padding:20px;border-radius:16px;box-shadow:0 3px 14px #0000000d;margin:18px 0}
+label{display:block;font-weight:bold;margin:12px 0 6px}input,select,textarea{width:100%;padding:11px;border:1px solid #ccc;border-radius:9px;font-size:15px}textarea{min-height:90px}
+button.primary{background:var(--primary);color:white;border:0;padding:12px 18px;border-radius:9px;cursor:pointer;font-weight:bold;margin-top:15px}
+.example{border-left:4px solid var(--primary);background:var(--secondary);padding:12px;margin-top:15px;border-radius:8px}
+table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden}th,td{padding:12px;border-bottom:1px solid #eee;text-align:left}th{background:#f0e5f8}
+.notice{padding:14px;border-radius:10px;background:#fff5d9;margin:15px 0}.private{border:2px solid #d9b8ef}
+footer{text-align:center;color:#766b79;padding:20px}
+@media(max-width:600px){header h1{font-size:24px}nav{top:87px}.card{padding:15px}table{font-size:13px}}
 </style>
 </head>
 <body>
-<header id="inicio"><h1>🤝 ConectaSocial</h1><p>Organize, conecte e fortaleça sua ação social!</p></header>
+<header><h1>💜 ConectaSocial</h1><p>Conectando projetos, pessoas, doações e oportunidades para transformar vidas.</p></header>
 
-<nav>
-<button onclick="go('inicio')">Início</button>
-<button onclick="go('p1')">1 Problema</button><button onclick="go('p2')">2 Carência</button>
-<button onclick="go('p3')">3 Solução</button><button onclick="go('p4')">4 Público</button>
-<button onclick="go('p5')">5 Negócio</button><button onclick="go('p6')">6 Diferencial</button>
-<button onclick="go('p7')">7 Equipe</button><button onclick="go('p8')">8 Próximos passos</button>
+<nav id="nav">
+<button class="active" data-tab="inicio">🏠 Início</button>
+<button data-tab="projeto">🏢 Meu Projeto</button>
+<button data-tab="voluntarios">🙋 Voluntários</button>
+<button data-tab="doadores">❤️ Doadores</button>
+<button data-tab="parceiros">🤝 Parceiros</button>
+<button data-tab="doacoes">🎁 Doações</button>
+<button data-tab="privada">🔒 Área Privada</button>
 </nav>
 
 <main>
-<div class="card" id="p1"><span class="num">1</span><h2>Problema</h2><p class="question">Que problema real existe, e para quem ele importa?</p>
-<p>ONGs e projetos sociais precisam administrar voluntários, participantes, doações, eventos, parceiros e relatórios usando várias ferramentas diferentes.</p></div>
+<section id="inicio" class="tab active">
+<h2>Painel geral</h2><p class="subtitle">Exemplo de um projeto social cadastrado no ConectaSocial.</p>
+<div class="grid">
+<div class="card"><h3>🙋 Voluntários</h3><div class="number">48</div><p>Pessoas cadastradas</p></div>
+<div class="card"><h3>❤️ Doadores</h3><div class="number">126</div><p>Pessoas e empresas</p></div>
+<div class="card"><h3>🤝 Parceiros</h3><div class="number">14</div><p>Organizações parceiras</p></div>
+<div class="card"><h3>🎁 Doações</h3><div class="number">203</div><p>Registros de doação</p></div>
+</div>
+<div class="example"><b>Exemplo:</b> Projeto Esperança — Recife/PE. Atende crianças e famílias em situação de vulnerabilidade com alimentação, educação e oficinas.</div>
+</section>
 
-<div class="card" id="p2"><span class="num">2</span><h2>Carência do Problema</h2><p class="question">Tragam pesquisas e dados que comprovem essa necessidade.</p>
-<p>Muitas organizações sociais, especialmente as pequenas, possuem poucos recursos para sistemas de gestão e precisam de uma solução simples, acessível e centralizada.</p></div>
+<section id="projeto" class="tab">
+<h2>🏢 Meu Projeto</h2><p class="subtitle">O próprio projeto social pode criar e atualizar seu cadastro.</p>
+<form onsubmit="salvar(event,'Projeto cadastrado com sucesso!')">
+<label>Nome do projeto</label><input value="Projeto Esperança" required>
+<label>CNPJ ou identificação</label><input value="12.345.678/0001-90">
+<label>Responsável</label><input value="Mariana Silva">
+<label>Localização</label><input value="Recife - PE">
+<label>Área de atuação</label><select><option>Assistência social</option><option>Educação</option><option>Saúde</option><option>Meio ambiente</option></select>
+<label>Descrição</label><textarea>Atendimento social, distribuição de alimentos e atividades educativas para famílias da comunidade.</textarea>
+<button class="primary">Salvar cadastro</button></form>
+<div class="example"><b>Exemplo:</b> missão: “Ajudar famílias a terem acesso a alimentação, educação e oportunidades.”</div>
+</section>
 
-<div class="card" id="p3"><span class="num">3</span><h2>Solução</h2><p class="question">Como a ideia resolve esse problema de forma inovadora?</p>
-<ul><li>Gestão de projetos e participantes</li><li>Cadastro e controle de voluntários</li><li>Campanhas e registro de doações</li><li>Agenda de eventos</li><li>Relatórios e prestação de contas</li><li>Comunicação com parceiros e apoiadores</li></ul></div>
+<section id="voluntarios" class="tab">
+<h2>🙋 Voluntários</h2>
+<form onsubmit="salvar(event,'Voluntário cadastrado com sucesso!')">
+<label>Nome completo</label><input placeholder="Ex.: João Pereira" required>
+<label>E-mail</label><input type="email" placeholder="joao@email.com">
+<label>Telefone</label><input placeholder="(81) 99999-9999">
+<label>Área de interesse</label><select><option>Educação</option><option>Alimentos</option><option>Eventos</option><option>Comunicação</option><option>Administrativo</option></select>
+<button class="primary">Cadastrar voluntário</button></form>
+<h3>Exemplos cadastrados</h3>
+<table><tr><th>Nome</th><th>Área</th><th>Disponibilidade</th></tr><tr><td>Ana Costa</td><td>Educação</td><td>Fins de semana</td></tr><tr><td>Lucas Lima</td><td>Eventos</td><td>2x por mês</td></tr><tr><td>Beatriz Souza</td><td>Comunicação</td><td>Remoto</td></tr></table>
+</section>
 
-<div class="card" id="p4"><span class="num">4</span><h2>Público-alvo e Mercado</h2><p class="question">Quem são os clientes e qual o tamanho do mercado?</p>
-<ul><li>ONGs e projetos sociais</li><li>Instituições religiosas e comunitárias</li><li>Escolas e associações</li><li>Empresas apoiadoras</li><li>Voluntários e doadores</li></ul></div>
+<section id="doadores" class="tab">
+<h2>❤️ Doadores</h2>
+<form onsubmit="salvar(event,'Doador cadastrado com sucesso!')">
+<label>Tipo</label><select><option>Pessoa física</option><option>Empresa</option></select>
+<label>Nome / Razão social</label><input placeholder="Ex.: Carlos Oliveira" required>
+<label>E-mail</label><input type="email" placeholder="contato@email.com">
+<label>Telefone</label><input placeholder="(81) 98888-8888">
+<label>Doação anônima?</label><select><option>Não</option><option>Sim</option></select>
+<button class="primary">Cadastrar doador</button></form>
+<div class="example"><b>Exemplo:</b> Empresa Sol Nascente — doadora mensal de alimentos e materiais de higiene.</div>
+</section>
 
-<div class="card" id="p5"><span class="num">5</span><h2>Modelo de Negócio</h2><p class="question">Como a startup vai gerar receita, e quem paga?</p>
-<ul><li>Plano gratuito com funções básicas</li><li>Planos pagos para organizações</li><li>Comissões sobre campanhas e parcerias</li><li>Publicidade e patrocínios</li></ul></div>
+<section id="parceiros" class="tab">
+<h2>🤝 Parceiros</h2>
+<form onsubmit="salvar(event,'Parceiro cadastrado com sucesso!')">
+<label>Nome da empresa/organização</label><input placeholder="Ex.: Mercado Bom Dia" required>
+<label>Tipo de parceiro</label><select><option>Empresa</option><option>ONG</option><option>Escola</option><option>Instituição pública</option><option>Outro</option></select>
+<label>Responsável</label><input placeholder="Nome do responsável">
+<label>Como ajuda?</label><textarea placeholder="Ex.: fornece alimentos, espaço, transporte..."></textarea>
+<button class="primary">Cadastrar parceiro</button></form>
+<div class="example"><b>Exemplos:</b> Mercado Bom Dia — alimentos; Escola Aprender — espaço para oficinas; Transportes Silva — logística.</div>
+</section>
 
-<div class="card" id="p6"><span class="num">6</span><h2>Diferencial Competitivo</h2><p class="question">O que torna a solução única frente à concorrência?</p>
-<ul><li>Foco específico no terceiro setor</li><li>Interface simples e acessível</li><li>Projetos, voluntários, doações e comunicação em um só lugar</li><li>Relatórios para transparência</li><li>Conexão entre projetos, voluntários, doadores e empresas</li></ul></div>
+<section id="doacoes" class="tab">
+<h2>🎁 Doações</h2>
+<form onsubmit="registrarDoacao(event)">
+<label>Doador</label><input placeholder="Ex.: Carlos Oliveira / Anônimo" required>
+<label>Tipo de doação</label><select id="tipoDoacao"><option>Financeira</option><option>Alimentos</option><option>Roupas</option><option>Materiais escolares</option><option>Higiene</option><option>Equipamentos</option><option>Outros</option></select>
+<label>Descrição</label><input placeholder="Ex.: 20 cestas básicas">
+<label>Valor (se financeira)</label><input id="valor" type="number" min="0" step="0.01" placeholder="0,00">
+<label>Doação anônima?</label><select><option>Não</option><option>Sim</option></select>
+<button class="primary">Registrar doação</button></form>
+<h3>Exemplos</h3>
+<table><tr><th>Doador</th><th>Tipo</th><th>Descrição</th><th>Valor</th></tr>
+<tr><td>Maria Alves</td><td>Financeira</td><td>Doação mensal</td><td>R$ 250,00</td></tr>
+<tr><td>Mercado Bom Dia</td><td>Alimentos</td><td>20 cestas básicas</td><td>—</td></tr>
+<tr><td>Anônimo</td><td>Roupas</td><td>35 peças</td><td>—</td></tr></table>
+</section>
 
-<div class="card" id="p7"><span class="num">7</span><h2>Equipe e Gestão</h2><p class="question">Quem lidera o projeto e quais habilidades a equipe precisa ter?</p>
-<ul><li>Gestor(a) do projeto</li><li>Desenvolvedor(a) de tecnologia</li><li>Profissional de marketing e comunicação</li><li>Responsável por parcerias e captação</li><li>Suporte e atendimento</li></ul></div>
-
-<div class="card" id="p8"><span class="num">8</span><h2>Próximos Passos</h2><p class="question">Quais as próximas etapas para testar e validar a ideia?</p>
-<ol><li>Desenvolver o MVP.</li><li>Testar com ONGs e projetos sociais.</li><li>Coletar feedback e ajustar o aplicativo.</li><li>Lançar oficialmente e captar parceiros.</li><li>Expandir para outras cidades e estados.</li></ol>
-<button class="action" onclick="go('inicio')">⬆ Voltar ao início</button></div>
+<section id="privada" class="tab">
+<h2>🔒 Área Privada</h2>
+<div class="notice">🔐 <b>Exemplo de área restrita:</b> em uma versão real, esta tela deve exigir login e permissões. Neste protótipo, ela é apenas demonstrativa.</div>
+<div class="grid">
+<div class="card private"><h3>💰 Total arrecadado</h3><div class="number">R$ 12.850,00</div></div>
+<div class="card private"><h3>🎁 Doações financeiras</h3><div class="number">67</div></div>
+<div class="card private"><h3>📦 Doações materiais</h3><div class="number">136</div></div>
+</div>
+<h3>Detalhamento de exemplos</h3>
+<table><tr><th>Data</th><th>Tipo</th><th>Valor</th><th>Observação</th></tr>
+<tr><td>10/09/2026</td><td>Financeira</td><td>R$ 500,00</td><td>Doação mensal</td></tr>
+<tr><td>09/09/2026</td><td>Alimentos</td><td>—</td><td>10 cestas</td></tr>
+<tr><td>08/09/2026</td><td>Equipamentos</td><td>—</td><td>2 computadores</td></tr></table>
+</section>
 </main>
-<footer>ConectaSocial — Juntos por um impacto maior.</footer>
+<footer>ConectaSocial • Protótipo demonstrativo em HTML</footer>
+
 <script>
-function go(id){document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})}
+const buttons=document.querySelectorAll('nav button');
+const tabs=document.querySelectorAll('.tab');
+function abrirTab(id){
+  tabs.forEach(t=>t.classList.toggle('active',t.id===id));
+  buttons.forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+buttons.forEach(b=>b.addEventListener('click',()=>abrirTab(b.dataset.tab)));
+function salvar(e,msg){e.preventDefault();alert(msg);e.target.reset();}
+function registrarDoacao(e){
+ e.preventDefault();
+ const valor=parseFloat(document.getElementById('valor').value||0);
+ alert(valor>0?'Doação financeira registrada! Valor: R$ '+valor.toFixed(2).replace('.',','):'Doação registrada com sucesso!');
+ e.target.reset();
+}
 </script>
 </body>
 </html>
